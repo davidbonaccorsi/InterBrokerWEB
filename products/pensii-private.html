@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pensii private – Inter Broker De Asigurare</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logo.png" type="image/png" />
+  <script>
+  (function() {
+    const path = location.pathname;
+    if (path !== '/' && path.endsWith('/')) {
+      // Elimină slash-ul final
+      const clean = location.href.slice(0, -1);
+      // Înlocuire + refresh
+      location.replace(clean);
+    }
+  })();
+</script>
+</head>
+<body>
+  <!-- Header and nav replicates as above -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo"><a href="https://euteasigur.ro"><img src="../assets/logo.png" alt="Inter Broker De Asigurare" /></a></div>
+      <nav>
+        <ul>
+          <li><a href="https://euteasigur.ro">Acasă</a></li>
+          <li class="services"><a href="#">Servicii ▾</a>
+            <div class="mega-menu">
+              <div class="mega-tabs"><button class="active" data-target="pf">Persoane Fizice</button><button data-target="pj">Persoane Juridice</button></div>
+              <div class="mega-content pf" style="display:grid;">
+                <a href="https://euteasigur.ro/products/viata" class="product-item"><div class="emoji">💖</div>Viață</a><a href="https://euteasigur.ro/products/sanatate" class="product-item"><div class="emoji">🏥</div>Sănătate</a><a href="https://euteasigur.ro/products/locuinta" class="product-item"><div class="emoji">🏡</div>Locuință</a><a href="https://euteasigur.ro/products/calatorii" class="product-item"><div class="emoji">✈️</div>Călătorii</a><a href="https://euteasigur.ro/products/pensii-private" class="product-item"><div class="emoji">💼</div>Pensii private</a><a href="https://euteasigur.ro/products/casco" class="product-item"><div class="emoji">🚗</div>CASCO</a><a href="https://euteasigur.ro/products/raspundere-civila" class="product-item"><div class="emoji">⚖️</div>Răspundere civilă</a><a href="https://euteasigur.ro/products/accidente-persoane" class="product-item"><div class="emoji">🦺</div>Accidente persoane</a><a href="https://euteasigur.ro/products/rca" class="product-item"><div class="emoji">📝</div>RCA</a>
+              </div>
+              <div class="mega-content pj" style="display:none;">
+                <a href="https://euteasigur.ro/products/sanatate-grup" class="product-item"><div class="emoji">👥</div>Sănătate de grup</a><a href="https://euteasigur.ro/products/car" class="product-item"><div class="emoji">🏗️</div>Asigurarea CAR</a><a href="https://euteasigur.ro/products/garantii-contractuale" class="product-item"><div class="emoji">📄</div>Garanții contractuale</a><a href="https://euteasigur.ro/products/agricole" class="product-item"><div class="emoji">🌾</div>Agricole</a><a href="https://euteasigur.ro/products/manageriala" class="product-item"><div class="emoji">👔</div>Managerială</a><a href="https://euteasigur.ro/products/accidente-angajati" class="product-item"><div class="emoji">🧑‍💼</div>Accidente angajați</a>
+              </div>
+              <div style="grid-column: 1 / -1; text-align:center; margin-top:1rem;"><a href="https://euteasigur.ro/products" class="btn-secondary">Vezi toate produsele</a></div>
+            </div>
+          </li>
+<li><a href="https://euteasigur.ro/about">Despre</a></li><li><a href="https://euteasigur.ro/partners">Parteneri</a></li><li><a href="https://euteasigur.ro/contact" class="cta">Obține ofertă</a></li>
+          </ul>
+      </nav>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </div>
+    <!-- Mobile navigation with nested service categories -->
+    <div class="mobile-nav">
+      <div class="nav-panel">
+        <div class="mobile-nav-logo">
+          <img src="../assets/logo.png" alt="Inter Broker De Asigurare" />
+          <span>Inter Broker De Asigurare</span>
+        </div>
+        <a href="https://euteasigur.ro">Acasă</a>
+        <a href="#" class="mobile-services-toggle">Servicii</a>
+        <div class="mobile-services">
+          <div class="mobile-category">
+            <h4 data-target="pf">Persoane fizice</h4>
+            <div class="mobile-sublist pf">
+              <a href="https://euteasigur.ro/products/viata"><span class="emoji">💖</span> Viață</a>
+              <a href="https://euteasigur.ro/products/sanatate"><span class="emoji">🏥</span> Sănătate</a>
+              <a href="https://euteasigur.ro/products/locuinta"><span class="emoji">🏡</span> Locuință</a>
+              <a href="https://euteasigur.ro/products/calatorii"><span class="emoji">✈️</span> Călătorii</a>
+              <a href="https://euteasigur.ro/products/pensii-private"><span class="emoji">💼</span> Pensii private</a>
+              <a href="https://euteasigur.ro/products/casco"><span class="emoji">🚗</span> CASCO</a>
+              <a href="https://euteasigur.ro/products/raspundere-civila"><span class="emoji">⚖️</span> Răspundere civilă</a>
+              <a href="https://euteasigur.ro/products/accidente-persoane"><span class="emoji">🦺</span> Accidente persoane</a>
+              <a href="https://euteasigur.ro/products/rca"><span class="emoji">📝</span> RCA</a>
+            </div>
+          </div>
+          <div class="mobile-category">
+            <h4 data-target="pj">Persoane juridice</h4>
+            <div class="mobile-sublist pj">
+              <a href="https://euteasigur.ro/products/sanatate-grup"><span class="emoji">👥</span> Sănătate de grup</a>
+              <a href="https://euteasigur.ro/products/car"><span class="emoji">🏗️</span> CAR</a>
+              <a href="https://euteasigur.ro/products/garantii-contractuale"><span class="emoji">📄</span> Garanții contractuale</a>
+              <a href="https://euteasigur.ro/products/agricole"><span class="emoji">🌾</span> Agricole</a>
+              <a href="https://euteasigur.ro/products/manageriala"><span class="emoji">👔</span> Managerială</a>
+              <a href="https://euteasigur.ro/products/accidente-angajati"><span class="emoji">🧑‍💼</span> Accidente angajați</a>
+            </div>
+          </div>
+        </div>
+        <a href="https://euteasigur.ro/about">Despre</a>
+        <a href="https://euteasigur.ro/partners">Parteneri</a>
+        <a href="https://euteasigur.ro/contact" class="cta">Obține ofertă</a>
+      </div>
+    </div>
+  </header>
+  <!-- Product cover: wide image and title -->
+  <section class="product-hero">
+    <img src="../assets/products/pensii.jpg" alt="Pensii private" />
+    <div class="container">
+      <h1>Pensii private</h1>
+      <p>Investește în viitorul tău financiar cu un plan de economisire sigur.</p>
+    </div>
+  </section>
+  <!-- Product Details restructured into an accordion for easier navigation -->
+  <section class="accordion">
+    <div class="container">
+      <details open>
+        <summary>1. Despre asigurare</summary>
+        <p>Pensia privată este un produs de economisire pe termen lung care îți permite să îți completezi pensia de stat. Contribuțiile tale sunt investite în fonduri diverse, generând randamente pe termen lung.</p>
+      </details>
+      <details>
+        <summary>2. Riscuri acoperite</summary>
+        <ul>
+          <li>Randamente garantate în funcție de produsul ales</li>
+          <li>Beneficii în caz de deces (moștenire a contului acumulat)</li>
+          <li>Avantaje fiscale pentru contribuții</li>
+        </ul>
+      </details>
+      <details>
+        <summary>3. Excluderi</summary>
+        <ul>
+          <li>Lipsa garanției unui randament minim (în cazul fondurilor cu risc mai ridicat)</li>
+          <li>Retrageri anticipate penalizate</li>
+        </ul>
+      </details>
+      <details>
+        <summary>4. Ce faci în caz de daună</summary>
+        <p>Pentru a solicita plata pensiei sau a părții acumulate, contactează administratorul fondului și depune documentele necesare (CI, cerere de plată, etc.).</p>
+      </details>
+      <p style="margin-top:2rem; text-align:center;"><a href="https://euteasigur.ro/contact" class="btn-primary">Obține ofertă</a></p>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="../assets/logo.png" alt="Inter Broker De Asigurare" /><span>Inter Broker De Asigurare</span></div>
+        <p>Simplificăm asigurările. Amplificăm siguranța.</p>
+      </div>
+      <div>
+        <h4>Legături utile</h4>
+        <ul>
+          <li><a href="https://euteasigur.ro">Acasă</a></li>
+          <li><a href="https://euteasigur.ro/products">Servicii</a></li>
+          <li><a href="https://euteasigur.ro/about">Despre</a></li>
+          <li><a href="https://euteasigur.ro/partners">Parteneri</a></li>
+          <li><a href="https://euteasigur.ro/contact">Contact</a></li>
+          <li><a href="https://euteasigur.ro/termeni">Termeni &amp; condiții</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><strong>Telefon:</strong> <a href="tel:+40750410860" style="color:#dbe6f3;">0750 410 860</a></li>
+          <li><strong>Email:</strong> <a href="mailto:office@euteasigur.ro" style="color:#dbe6f3;">office@euteasigur.ro</a></li>
+          <li><strong>Adresă:</strong> Baba Novac nr.19, Sector 3,  București</li>
+        <li><strong>Program:</strong> Luni – Duminica, 8:00 – 22:00 </li>
+        <!-- Link către pagina de Facebook -->
+        <li><a href="https://www.facebook.com/people/Asigurari-Ca-La-Carte/61567871543157" target="_blank" rel="noopener"><img src="../assets/facebook.png" alt="Facebook" class="footer-icon"> Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; <span id="year-pen"></span> Inter Broker De Asigurare SRL. Toate drepturile rezervate.</div>
+  </footer>
+  <script src="../js/script.js"></script>
+  <script>document.getElementById('year-pen').textContent = new Date().getFullYear();</script>
+  <script>
+  const isLocal = /^http:\/\/127\.0\.0\.1:\d+$/.test(location.origin);
+
+  document.querySelectorAll("a").forEach(link => {
+    if (isLocal) {
+      const originalHref = link.getAttribute("href");
+
+      // Dacă e linkul exact către homepage, redirecționează către index.html
+      if (originalHref === "https://euteasigur.ro") {
+        link.setAttribute("href", "../index.html");
+        return;
+      }
+
+      // Pentru celelalte linkuri, elimină domeniul și adaugă .html
+      const stripped = originalHref.replace(/^https:\/\/euteasigur\.ro/, "");
+      link.setAttribute("href", `..${stripped}.html`);
+    }
+  });
+</script>
+  <!-- Floating WhatsApp button -->
+  <a href="https://wa.me/40750410860?text=Bună%20ziua!%20As%20dorii%20o%20ofertă." class="wa-float" aria-label="Contact pe WhatsApp"><img src="../assets/whatsapp.svg" alt="WhatsApp" style="width:1.6rem;height:1.6rem;"></a>
+</body>
+</html>

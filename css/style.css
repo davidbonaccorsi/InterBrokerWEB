@@ -1,0 +1,2083 @@
+/*
+ * Global Stylesheet for Inter Broker De Asigurare
+ *
+ * This file defines the look and feel of the entire web site.  It
+ * establishes a simple colour palette inspired by the official
+ * company logo (turquoise and deep blue) and provides sensible
+ * spacing and typography defaults.  The layout is fluid and
+ * responsive: containers grow to a sensible maximum width on large
+ * displays but always respect smaller screens.  On mobile devices
+ * the navigation collapses into a hamburger menu and the mega menu
+ * fills the top of the viewport when opened.  Throughout the
+ * stylesheet you will find media queries to tailor the design for
+ * different screen sizes.
+ */
+
+:root {
+  /* Colour palette derived from the client's logo */
+  --primary-color: #60cffb;      /* light turquoise */
+  --secondary-color: #0077a6;    /* stronger turquoise */
+  --accent-color: #002e5d;       /* navy blue */
+  --light-bg: #f5f8fc;           /* very light grey for panels */
+  --dark-text: #002e5d;          /* default text colour */
+  --muted-text: #6c7890;         /* secondary text */
+  --border-color: #e0e8f1;       /* subtle borders */
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --white: #fff;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --radius: 12px;
+  /* Additional accent colours for highlights and animations */
+  --highlight-color: #e6f7ff;
+  --light-border: #cfdced;
+}
+
+/* Reset some built‑in browser styles and establish base font */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--dark-text);
+  background-color: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: var(--accent-color);
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* Container to constrain content width and apply horizontal padding */
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ------------------------------------------------------------ */
+/* Header and Navigation */
+/* ------------------------------------------------------------ */
+header {
+  /* Keep the header pinned to the top of the viewport and give it a subtle shadow.
+     Increase the default height via the container on larger screens to improve
+     presence on desktop while still remaining compact on smaller devices.  We
+     bumped the default height to 150px so the logo and menu feel more
+     substantial on wide screens.  On smaller screens this height is scaled
+     down gracefully via media queries. */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Set a moderate height for the navigation bar on desktop.  A lower
+     height keeps the header unobtrusive while still allowing enough
+     breathing room for the logo and menu items. */
+  height: 120px;
+  padding: 0 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  /* Enlarge the logo slightly to improve visibility, especially on mobile where
+     it competes with the hamburger icon. */
+  height: 60px;
+  width: auto;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+nav ul li {
+  position: relative;
+}
+
+nav a {
+  /* Slightly larger font size for navigation links on desktop for better readability */
+  font-size: 1.2rem;
+  color: var(--dark-text);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+  background-color: var(--light-bg);
+}
+
+nav a.cta {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav a.cta:hover {
+  background-color: var(--accent-color);
+}
+
+/* Hamburger button for mobile navigation */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background-color: var(--dark-text);
+  margin-bottom: 5px;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Mobile nav overlay */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 9999;
+}
+
+.mobile-nav.active {
+  display: flex;
+}
+
+/*
+ * The mobile navigation panel was originally a narrow drawer that slid in
+ * from the left.  To better utilise the available space on mobile and
+ * accommodate nested categories, the panel now spans the full width of
+ * the viewport and occupies roughly half of the screen height.  The
+ * remainder of the screen is dimmed by the semi‑transparent overlay on
+ * `.mobile-nav`.  On long lists the panel becomes scrollable.
+ */
+/* Mobile drawer panel now grows to accommodate its contents.  The
+ * fixed height previously capped the panel at half the screen,
+ * causing long lists to scroll inside the drawer.  Instead we
+ * allow the panel to expand so that it fills the height of the
+ * viewport when necessary.  Removing the explicit height and
+ * overflow enables the drawer to cover the entire screen,
+ * preventing awkward scrolling inside. */
+/* The mobile drawer now fills the entire viewport when opened.  This
+   prevents the underlying page from remaining visible or scrollable
+   when the user expands nested service lists.  We fix the height to
+   100vh and enable scrolling on the panel itself if the content
+   overflows. */
+.mobile-nav .nav-panel {
+  background-color: var(--white);
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow-y: auto;
+}
+
+/* Logo at the top of the mobile nav drawer */
+.mobile-nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.mobile-nav-logo img {
+  height: 40px;
+  width: auto;
+}
+.mobile-nav-logo span {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+}
+
+.mobile-nav .nav-panel a {
+  font-size: 1.1rem;
+  color: var(--dark-text);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-nav .nav-panel a.cta {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  border: none;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Mobile services list inside the mobile nav.  This vertical menu
+   displays the available insurance products directly in the drawer on
+   small screens.  Headings separate "Persoane fizice" and
+   "Persoane juridice" categories while the links themselves include a
+   small emoji to aid recognition. */
+.mobile-services {
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+  /* Hide the mobile services list by default.  It will be toggled
+     open via JavaScript when the user taps on the “Servicii” link in
+     the mobile navigation. */
+  display: none;
+}
+.mobile-services h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--accent-color);
+}
+.mobile-services a {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  color: var(--dark-text);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.mobile-services a:last-child {
+  border-bottom: none;
+}
+.mobile-services .emoji {
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+/* When the mobile services menu is toggled open, display it */
+.mobile-services.open {
+  display: block;
+}
+
+
+/* Mega menu styles */
+.mega-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  width: 80vw;
+  max-width: 900px;
+  /* Use a very light tinted background instead of pure white to
+     distinguish the mega menu from the page and reduce the sense of
+     emptiness. A subtle border improves definition. */
+  background-color: #f7fbff;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: none;
+  grid-template-columns: 1fr;
+}
+
+/* Tabs within mega menu */
+.mega-menu .mega-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.mega-menu .mega-tabs button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.mega-menu .mega-tabs button.active {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border-color: var(--secondary-color);
+  /* Add an inset shadow to emphasise the active tab */
+  box-shadow: 0 0 0 2px var(--secondary-color) inset;
+}
+
+.mega-menu .mega-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.mega-menu .product-item {
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  /* Increase font size and weight for product labels to enhance readability */
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mega-menu .product-item:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mega-menu .product-item .emoji {
+  /* Enlarge emojis slightly for stronger visual cues */
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Make the "Vezi toate serviciile" button inside the mega menu more
+   prominent.  Increase padding and font size and ensure it appears as a
+   primary call‑to‑action within the dropdown. */
+.mega-menu .btn-secondary {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+/* Show mega menu on hover for desktop */
+nav li.services:hover .mega-menu {
+  display: grid;
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  /* Use a neutral light background instead of a photographic or gradient
+     image to keep the welcome message legible and elegant on all
+     devices. */
+  background-color: var(--light-bg);
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--dark-text);
+  overflow: hidden;
+}
+
+/* Home page hero (first section).  This layout centres the welcome
+   message and positions a mosaic of images to the right on large
+   screens.  On smaller screens the images stack below the text. */
+.home-hero {
+  background-color: var(--white);
+  padding: 4rem 0;
+}
+.hero-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.hero-text {
+  flex: 1 1 450px;
+  max-width: 600px;
+}
+.hero-text .badge {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.hero-text h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted-text);
+}
+.hero-images {
+  /* Restrict the width of the image mosaic so it never overwhelms the hero
+     copy.  On large screens this column will not grow beyond 340px which
+     keeps the pictures balanced against the headline.  The grid layout
+     remains the same: a 2×2 mosaic with the first cell spanning two rows. */
+  flex: 1 1 340px;
+  max-width: 340px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+.hero-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+/* Make the first image span two rows on larger screens to create a mosaic */
+.hero-images img:first-child {
+  grid-row: span 2;
+}
+
+/* Responsive adjustments for the home hero */
+@media (max-width: 768px) {
+  .hero-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-text {
+    text-align: left;
+  }
+  .hero-images {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    margin-top: 2rem;
+    /* Stack the images and gently overlap the second and third images to
+       create a cohesive mosaic on mobile.  Negative margins bring the
+       images together without leaving a gap, similar to the inspiration
+       layout. */
+  }
+  .hero-images img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .hero-images img:nth-child(2) {
+    margin-top: -20px;
+  }
+  .hero-images img:nth-child(3) {
+    margin-top: -20px;
+  }
+  .hero-images img:first-child {
+    grid-row: auto;
+  }
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+/* ------------------------------------------------------------ */
+/* Services landing hero on the products page */
+/* ------------------------------------------------------------ */
+.services-landing {
+  background-color: var(--white);
+  padding: 4rem 0;
+}
+.services-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.services-text {
+  flex: 1 1 450px;
+  max-width: 600px;
+}
+.services-text h1 {
+  font-size: 2.6rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+.services-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted-text);
+}
+.services-images {
+  /* Limit the size of the service hero mosaic similar to the home page.  A
+     maximum width prevents the imagery from dominating the hero on wide
+     screens while allowing it to grow naturally on smaller devices. */
+  flex: 1 1 340px;
+  max-width: 340px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+.services-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.services-images img:first-child {
+  grid-row: span 2;
+}
+@media (max-width: 768px) {
+  .services-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .services-images {
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    margin-top: 2rem;
+  }
+  .services-images img {
+    width: 100%;
+    border-radius: var(--radius);
+  }
+  .services-images img:nth-child(2) {
+    margin-top: -20px;
+  }
+  .services-images img:nth-child(3) {
+    margin-top: -20px;
+  }
+  .services-images img:first-child {
+    grid-row: auto;
+  }
+  .services-text h1 {
+    font-size: 2.2rem;
+  }
+  .services-text p {
+    font-size: 1rem;
+  }
+}
+/* The gradient and overlay backgrounds are no longer used on the hero.  The
+   section uses the page background colour instead. */
+
+.hero-content {
+  max-width: 600px;
+  margin-left: 5%;
+}
+
+/* Style for the welcome line that precedes the hero headline.  It uses a
+   slightly smaller font and a secondary colour to differentiate it from
+   the main motto. */
+.welcome-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #e8f2fc;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  /* Preserve white text on hover so that the label remains legible against
+     the darker background */
+  color: var(--white);
+}
+
+.btn-secondary {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Product selector on index */
+.product-selector {
+  padding: 4rem 0;
+  background-color: var(--light-bg);
+}
+.product-selector h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.ps-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.ps-tabs button {
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.ps-tabs button.active {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border-color: var(--secondary-color);
+  /* Add subtle elevation and outline to emphasise the active tab */
+  box-shadow: 0 0 0 2px var(--secondary-color) inset, 0 0 6px rgba(0,0,0,0.05);
+}
+.ps-content {
+  display: none;
+}
+.ps-content.active {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.ps-content .ps-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  text-align: center;
+  cursor: pointer;
+  /* Add a soft border and transition to create a card‑like feel */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ps-content .ps-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.ps-content .ps-card .emoji {
+  /* Increase emoji size for added emphasis */
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+.ps-more {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Stats section */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  /* Add extra space on top so that the overlaid heading can sit
+     comfortably above the counters on larger screens. */
+  padding: 6rem 0 4rem;
+  background-color: var(--white);
+}
+.stat-item {
+  flex: 1 1 200px;
+  max-width: 280px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem 1rem;
+  background-color: var(--light-bg);
+  transition: transform 0.3s ease;
+}
+.stat-item:hover {
+  transform: translateY(-6px);
+}
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--muted-text);
+}
+
+/* Advantages */
+.advantages {
+  padding: 4rem 0;
+  background-color: var(--light-bg);
+}
+.advantages .adv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.adv-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.adv-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.adv-card .emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.adv-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+.adv-card p {
+  color: var(--muted-text);
+}
+
+/* Testimonials */
+.testimonials {
+  padding: 4rem 0;
+  background-color: var(--white);
+}
+.testimonials h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.testimonial-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.testimonial {
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.testimonial .quote {
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+.testimonial .author {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+/* Google logo next to testimonials heading */
+.google-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.google-link img {
+  width: 18px;
+  height: auto;
+}
+
+/* Info section with large images integrated into the homepage */
+.info-section {
+  padding: 4rem 0;
+  background-color: var(--white);
+}
+.info-section .info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+}
+.info-section .info-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.info-section .info-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.info-section .info-item:hover img {
+  transform: scale(1.05);
+}
+.info-section .info-item .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  transition: background-color 0.4s ease;
+}
+.info-section .info-item:hover .overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+.info-section .info-item h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--white);
+}
+.info-section .info-item p {
+  font-size: 1rem;
+  color: #e0e8f1;
+}
+/* Partners */
+.partners {
+  padding: 4rem 0;
+  background-color: var(--light-bg);
+}
+.partners h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-items: center;
+}
+.partner-grid img {
+  max-width: 100%;
+  height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: filter 0.2s ease, opacity 0.2s ease;
+}
+.partner-grid img:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* On small screens the partner logos are shown in full colour by default.  To
+   add some visual interest, the logos fade in sequentially when the page
+   loads.  Each image's animation is delayed slightly relative to the
+   previous one. */
+@media (max-width: 768px) {
+  .partner-grid img {
+    filter: none;
+    opacity: 0;
+    animation: showLogo 0.8s ease forwards;
+  }
+  .partner-grid img:nth-child(1) { animation-delay: 0s; }
+  .partner-grid img:nth-child(2) { animation-delay: 0.2s; }
+  .partner-grid img:nth-child(3) { animation-delay: 0.4s; }
+  .partner-grid img:nth-child(4) { animation-delay: 0.6s; }
+  .partner-grid img:nth-child(5) { animation-delay: 0.8s; }
+  .partner-grid img:nth-child(6) { animation-delay: 1s; }
+  .partner-grid img:nth-child(7) { animation-delay: 1.2s; }
+  .partner-grid img:nth-child(8) { animation-delay: 1.4s; }
+}
+@keyframes showLogo {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ----------------------------------------------------------------------- */
+/* Featured services cards on the home page
+ *
+ * These large cards sit between the hero and the product selector and
+ * showcase some of the most popular insurance categories.  Each card
+ * displays a full‑bleed background image with an overlay and caption.  On
+ * hover the background image subtly zooms in to add a sense of depth. */
+.featured-services {
+  padding: 4rem 0;
+  background-color: var(--white);
+}
+.featured-services h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Featured services cards: display background images via <img> element. */
+.featured-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  height: 260px;
+  color: var(--white);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.featured-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+.featured-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35); /* darken to improve legibility */
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+.featured-card:hover::before,
+.featured-card:hover img {
+  transform: scale(1.05);
+}
+.featured-card .fc-content {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+.featured-card h4 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+  color: var(--white);
+}
+.featured-card p {
+  font-size: 1rem;
+  color: #f0f4fa;
+}
+
+/* ----------------------------------------------------------------------- */
+/* Reveal animation
+ *
+ * Sections or elements with the `reveal` class will start hidden and slide up
+ * into view when they enter the viewport.  A companion class `in-view`
+ * toggled via JavaScript triggers the final state.  Use these on any
+ * large section in the page to create subtle scroll animations that
+ * improve the sense of progression without being distracting.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* WhatsApp floating button */
+.wa-float {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background-color: #25D366;
+  color: #fff;
+  padding: 0.8rem 1.2rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+  z-index: 1100;
+  transition: background-color 0.2s ease;
+}
+.wa-float:hover {
+  background-color: #128C7E;
+}
+
+/* ------------------------------------------------------------------ */
+/* Mobile category navigation within the mobile drawer
+ *
+ * When the user taps on "Servicii" in the mobile nav, two categories
+ * (persoane fizice and persoane juridice) are shown.  Each category
+ * heading acts as a toggle that reveals its associated list of
+ * products.  Only one category list is visible at a time to prevent
+ * overwhelming the screen.  The `.mobile-sublist.open` class is set
+ * via JavaScript to control visibility.
+ */
+.mobile-category h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: var(--accent-color);
+}
+.mobile-sublist {
+  display: none;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-left: 0.5rem;
+}
+.mobile-sublist a {
+  font-size: 0.95rem;
+  color: var(--dark-text);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.mobile-sublist a:last-child {
+  border-bottom: none;
+}
+.mobile-sublist.open {
+  display: flex;
+}
+
+/* Yellow badge variant used on the contact page.  It reuses the
+ * pill‑shaped style of the default `.badge` class but swaps the
+ * background for the warning colour and uses a dark text colour for
+ * better contrast.  This badge draws attention without clashing with
+ * the primary colour palette.
+ */
+.badge-yellow {
+  display: inline-block;
+  background-color: var(--warning-color);
+  color: var(--accent-color);
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Enhance the statistics heading for greater impact.  Place the
+ * heading in the centre, increase its size and weight, and use an
+ * alternative serif font to create a distinctive look.  This rule
+ * supersedes any inline styles previously set on the stats section.  */
+.stats h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  font-family: 'Trebuchet MS', 'Georgia', serif;
+  color: var(--accent-color);
+}
+
+/* Position the statistics heading over the stats panels on large
+ * screens.  By default the heading sits above the grid, but on
+ * desktop we overlay it on top of the statistic cards to create
+ * more impact.  The `.stats` container is set to relative so
+ * absolutely positioned children are placed relative to it. */
+.stats {
+  position: relative;
+}
+@media (min-width: 992px) {
+  .stats h2 {
+    position: absolute;
+    /* Centre the heading horizontally and push it a bit lower on the
+       page so it no longer overlaps the colour transition line on
+       desktop.  We remove the vertical translate and instead use
+       a fixed top offset. */
+    /* Move the statistics heading lower on desktop to prevent it
+     * overlapping the subtle background transition line.  A larger
+     * top offset improves separation between the heading and the
+     * panels below. */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    max-width: 90%;
+    pointer-events: none;
+    text-align: center;
+  }
+}
+
+/* Product hero section used on individual product pages.  Displays a
+ * wide banner image followed by the product title.  The image is
+ * responsive and maintains its aspect ratio. */
+.product-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+}
+.product-hero h1 {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+/* On larger screens we limit the width of the product hero image so it
+ * doesn't overwhelm the layout.  The image is centred and occupies only
+ * a portion of the available width to better balance the content. */
+@media (min-width: 992px) {
+  .product-hero img {
+    /* On larger screens, limit the width so that the hero images do not
+     * dominate the viewport.  A 50% cap centres the image and leaves
+     * generous margins on either side for breathing room. */
+    max-width: 45%;
+    margin: 0 auto;
+  }
+}
+
+/* Small icon used in the footer contact list for social links.  The icon
+ * aligns with the text baseline and has a modest size. */
+.footer-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 0.3rem;
+}
+
+/* Accordion styles used on product pages to organise information into
+ * expandable sections.  Each details element forms a card with
+ * rounded corners and a subtle border.  The summary acts as the
+ * clickable header. */
+.accordion details {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+}
+.accordion summary {
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+.accordion details[open] summary {
+  margin-bottom: 0.5rem;
+}
+
+.accordion ul {
+  list-style-position: inside;   /* mută punctul în interior */
+  margin: 0;
+  padding-left: 1rem;            /* ajustează cât de mult vrei să fie indentat */
+}
+
+.accordion li {
+  margin-bottom: 0.5rem;         /* spațiu între puncte */
+}
+
+/* Breadcrumb navigation */
+.breadcrumb {
+  font-size: 0.9rem;
+  margin: 1rem 0;
+  color: var(--muted-text);
+}
+.breadcrumb a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+/* Footer */
+footer {
+  background-color: var(--accent-color);
+  color: #dbe6f3;
+  padding: 3rem 0;
+}
+footer .footer-grid {
+  display: grid;
+  /* Spread the three columns evenly on large screens. Each column grows to
+     occupy available space, ensuring balance between sections. On smaller
+     screens the auto-fit rule still applies. */
+  /* Distribute four columns evenly. Each column grows to fill available space
+     but remains at least 220px wide for readability. Using four columns
+     ensures a balanced layout regardless of content volume. */
+  /* Use a slightly larger minimum width to allow the first column with
+     the logo and description to occupy more space.  This helps balance
+     the overall appearance of the footer columns. */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+footer h4 {
+  margin-bottom: 1rem;
+  color: #fff;
+}
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+footer ul li {
+  margin-bottom: 0.5rem;
+}
+footer ul li a {
+  color: #dbe6f3;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+footer ul li a:hover {
+  color: var(--primary-color);
+}
+
+/* Additional list for featured services in footer */
+.footer-services {
+  list-style: none;
+  margin-top: 1rem;
+  color: #cbd7e5;
+  font-size: 0.9rem;
+}
+.footer-services li {
+  margin-bottom: 0.3rem;
+}
+footer .footer-logo {
+  /* Stack the logo and company description vertically in the footer.  This
+     arrangement helps the first column occupy a similar height as the other
+     columns and allows for a larger logo. */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Center the logo and accompanying text within the footer on small screens
+   to better align with the other columns. */
+@media (max-width: 768px) {
+  footer .footer-logo {
+    align-items: center;
+    text-align: center;
+  }
+  footer .footer-logo span {
+    display: block;
+    text-align: center;
+  }
+}
+footer .footer-logo img {
+  /* Increase the logo size for better visibility in the footer.  A larger
+     height helps the first column match the visual weight of the other
+     footer sections. */
+  height: 110px;
+  width: auto;
+}
+footer .footer-bottom {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #a7b9cf;
+}
+
+/* Page specific styles */
+/* About page */
+.about-hero {
+  position: relative;
+  /* Shorten the height slightly so the hero does not dominate the page on
+     mobile.  A taller height was causing the text to sit low on the
+     screen and be difficult to read. */
+  height: 50vh;
+  background: url('../assets/about-hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+}
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Increase overlay opacity so that white text remains legible over the
+     photograph.  A darker backdrop improves contrast, especially on
+     smaller devices where the image details can interfere with the
+     message. */
+  background: rgba(0,0,0,0.55);
+}
+.about-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Increase the size of the heading and centre the text in the about hero to
+   improve readability over the background image. */
+.about-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.about-hero p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--white);
+}
+.about-section {
+  padding: 4rem 0;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
+.about-grid img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+.about-grid .text {
+  font-size: 1rem;
+  color: var(--muted-text);
+}
+/* Values cards */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.value-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+.value-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.value-card .emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+.value-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+.value-card p {
+  color: var(--muted-text);
+}
+
+/* Partners page */
+/* Partners list wrapper.  On the revamped partners page we reduce the top
+ * padding so that the list appears immediately after the headline.  The
+ * bottom padding is left generous to allow breathing space at the end
+ * of the page. */
+.partner-list-page {
+  padding: 2rem 0;
+}
+.partner-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  background-color: var(--light-bg);
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  transition: box-shadow 0.2s ease;
+}
+.partner-item:hover {
+  box-shadow: var(--shadow);
+}
+.partner-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+}
+.partner-item .partner-details h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+.partner-item .partner-details p {
+  color: var(--muted-text);
+  font-size: 0.95rem;
+}
+
+/* Contact/Oferta page */
+.contact-hero {
+  position: relative;
+  height: 50vh;
+  background: url('../assets/contact-hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+.contact-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+}
+.contact-hero .container {
+  position: relative;
+  z-index: 1;
+}
+.contact-highlights {
+  background-color: var(--light-bg);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.contact-highlights .phone {
+  font-size: 2rem;
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+.contact-highlights .email {
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  margin-top: 0.5rem;
+}
+.contact-form {
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: var(--white);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+}
+.contact-form form {
+  display: grid;
+  gap: 1rem;
+}
+.contact-form label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.contact-form button {
+  width: fit-content;
+  padding: 0.7rem 1.5rem;
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 600;
+}
+.contact-form button:hover {
+  background-color: var(--accent-color);
+}
+
+/* Responsive queries */
+@media (max-width: 992px) {
+  /* At medium widths reduce the nav height slightly and tighten padding. */
+  .nav-container {
+    /* On medium screens reduce the height a bit but still keep it taller
+       than before for better legibility. */
+    height: 150px;
+    padding: 0 40px;
+  }
+  .mega-menu {
+    width: 90vw;
+  }
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+  }
+  .nav-container {
+    /* On small screens reduce the header height further for mobile while
+       keeping enough space for the logo and hamburger icon. */
+    height: 120px;
+    padding: 0 24px;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .mega-menu {
+    position: static;
+    transform: none;
+    width: 100%;
+    box-shadow: none;
+    padding: 1rem;
+  }
+  nav li.services:hover .mega-menu {
+    display: none;
+  }
+  /* Stats grid becomes two columns */
+  .stats {
+    gap: 1rem;
+  }
+  .stat-item {
+    flex: 1 1 45%;
+  }
+  .partner-grid img {
+    height: 40px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  /* Centre the company logo and text in the first column of the footer.
+     Without this rule the logo appears left‑aligned while the other
+     columns are centered on narrow screens.  Adjusting both the
+     flex container and text alignment yields a balanced layout. */
+  .footer-grid > div:first-child {
+    text-align: center;
+  }
+  .footer-grid > div:first-child .footer-logo {
+    justify-content: center;
+  }
+  .footer-logo {
+    justify-content: center;
+  }
+
+  /* On mobile there is no hover state, so reveal the service card overlays by default.
+     This ensures the product names and descriptions are visible over the images. Also
+     shorten the image height slightly to accommodate the overlay. */
+  .service-card .service-overlay {
+    transform: translateY(0);
+  }
+  .service-card img {
+    height: 180px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* On small screens the header remains visible and slightly smaller. */
+  .nav-container {
+    /* On small screens the header remains visible.  We enlarge it slightly
+       compared to the previous design so the logo and hamburger icon are
+       easier to spot. */
+    height: 110px;
+    padding: 0 24px;
+  }
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  .stat-item {
+    flex: 1 1 100%;
+  }
+  .contact-highlights .phone {
+    font-size: 1.5rem;
+  }
+  .contact-form {
+    padding: 1.5rem;
+  }
+}
+
+/* ------------------------------------------------------------ */
+/* Services page */
+/* ------------------------------------------------------------ */
+.services-hero {
+  position: relative;
+  height: 50vh;
+  /* Remove the fixed services hero photo in favour of a gradient consistent with the
+     home hero.  A gradient improves text contrast and adapts naturally across
+     different screen sizes. */
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  display: flex;
+  align-items: center;
+  color: var(--white);
+}
+.services-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Lighten the overlay on the services hero to keep headings sharp */
+  background: rgba(0,0,0,0.15);
+}
+.services-hero .container {
+  position: relative;
+  z-index: 1;
+}
+.services-section {
+  padding: 4rem 0;
+}
+.service-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.service-tabs button {
+  padding: 0.5rem 1.25rem;
+  background-color: var(--light-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.service-tabs button.active {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 2px var(--secondary-color) inset;
+}
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.service-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+.service-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.service-card:hover img {
+  transform: scale(1.05);
+}
+.service-card .service-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1rem;
+  transition: transform 0.3s ease;
+  transform: translateY(100%);
+}
+.service-card:hover .service-overlay {
+  transform: translateY(0);
+}
+
+/* When a service card receives the `active` class (set by JavaScript on
+   narrow viewports), reveal the overlay just as if the user were hovering
+   it.  This allows mobile visitors to see the product name and
+   description when the card scrolls into view. */
+.service-card.active .service-overlay {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  /* On very small screens, always show the overlay so the product name and
+     description remain visible even if IntersectionObserver fails to
+     toggle the active class (e.g. due to script loading issues). */
+  .service-card .service-overlay {
+    transform: translateY(0);
+  }
+}
+.service-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+.service-card p {
+  font-size: 0.9rem;
+  color: var(--muted-text);
+}
+
+/* On smaller screens modify the service card overlay to improve
+   readability over the image.  We switch the overlay to a dark
+   transparent background and set the text to white, and disable the
+   image zoom effect to prevent cropping the image on mobile. */
+@media (max-width: 992px) {
+  .service-card .service-overlay {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  .service-card h4,
+  .service-card p {
+    color: var(--white);
+  }
+  .service-card:hover img {
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------ */
+/* About landing section styles */
+/* This section appears at the top of the Despre (About) page.  It follows the
+   same aesthetic as the home hero: a badge, bold headline and a mosaic of
+   illustrations. */
+.about-landing {
+  padding: 4rem 0;
+}
+.about-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+.about-text .badge {
+  display: inline-block;
+  background-color: var(--warning-color);
+  color: var(--accent-color);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+.about-text h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.about-text p {
+  font-size: 1.1rem;
+  color: var(--muted-text);
+}
+.about-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+}
+.about-images img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+}
+.about-images img:first-child {
+  grid-row: span 2;
+}
+@media (max-width: 992px) {
+  .about-wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .about-images {
+    grid-template-columns: 1fr;
+  }
+  .about-images img:first-child {
+    grid-row: auto;
+  }
+}
+
+/* On smaller screens remove the white overlay and show text directly on
+   the photo.  The text inherits a light colour and the overlay
+   becomes a subtle dark gradient to maintain readability.  Zoom
+   effects on hover are disabled to avoid distracting interactions on
+   touch devices. */
+@media (max-width: 992px) {
+  .service-card img {
+    /* Disable scaling on hover for mobile */
+    transform: none !important;
+  }
+  .service-card:hover img {
+    transform: none !important;
+  }
+  .service-card .service-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    color: var(--white);
+    transform: translateY(0);
+  }
+  .service-card h4,
+  .service-card p {
+    color: var(--white);
+  }
+}
+
+/* ------------------------------------------------------------ */
+/* Generic page hero (used for partner and other pages) */
+/* ------------------------------------------------------------ */
+.page-hero {
+  position: relative;
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+.page-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.page-hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #e7effa;
+}
+@media (max-width: 768px) {
+  .page-hero {
+    height: 40vh;
+    padding: 3rem 0;
+  }
+  .page-hero h1 {
+    font-size: 2.2rem;
+  }
+  .page-hero p {
+    font-size: 1rem;
+  }
+}
+
+/*
+ * Partners hero section
+ *
+ * The partners landing section replaces the generic page hero on the
+ * partners page.  It removes the dark overlay and instead uses a
+ * clean white background to draw attention to the headline.  An
+ * elegant serif font is used to create an “exotic” feel.  The
+ * paragraph beneath the headline serves as a subtitle.
+ */
+.partners-hero {
+  padding: 4rem 0 2rem;
+  background-color: var(--white);
+  text-align: center;
+}
+.partners-hero h1 {
+  font-size: 2.8rem;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+.partners-hero p {
+  font-size: 1.2rem;
+  color: var(--muted-text);
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+}
+@media (max-width: 768px) {
+  .partners-hero h1 {
+    font-size: 2.2rem;
+  }
+  .partners-hero p {
+    font-size: 1rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Contact landing section                                             */
+/*
+ * The contact page uses a two‑column layout: textual information on
+ * the left and a mosaic of illustrative images on the right.  A
+ * light background distinguishes the section from the rest of the
+ * page.  On small screens the columns stack vertically and the
+ * images adjust their size accordingly.  The first image spans two
+ * rows to create an asymmetrical composition reminiscent of the
+ * homepage mosaic.
+ */
+.contact-landing {
+  padding: 4rem 0;
+  background-color: var(--light-bg);
+}
+.contact-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.contact-text {
+  flex: 1;
+  min-width: 280px;
+}
+.contact-text h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+.contact-text p {
+  font-size: 1.1rem;
+  color: var(--muted-text);
+}
+.contact-methods {
+  list-style: none;
+  margin-top: 1.5rem;
+}
+.contact-methods li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.contact-methods a {
+  color: var(--secondary-color);
+}
+.contact-images {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 150px;
+  gap: 1rem;
+}
+.contact-images img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.contact-images img:first-child {
+  grid-row: span 2;
+}
+@media (max-width: 768px) {
+  .contact-wrapper {
+    flex-direction: column;
+  }
+  .contact-images {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 120px;
+  }
+  .contact-text h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Contact direct section styles
+ *
+ * This section sits below the contact hero and displays the key
+ * contact details alongside a friendly illustration.  On desktop it
+ * uses a two‑column layout; on mobile it stacks the elements.  The
+ * styling mirrors other hero sections with generous padding and
+ * balanced typography.
+ */
+.contact-direct {
+  padding: 4rem 0;
+  background-color: var(--white);
+}
+.direct-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.direct-text {
+  flex: 1 1 400px;
+}
+.direct-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+.direct-text p {
+  font-size: 1.1rem;
+  color: var(--muted-text);
+  margin-bottom: 1rem;
+}
+.direct-text ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+.direct-text ul li {
+  margin-bottom: 0.5rem;
+}
+.direct-text a {
+  color: var(--secondary-color);
+}
+.direct-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+.direct-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+@media (max-width: 768px) {
+  .direct-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .direct-image img {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}

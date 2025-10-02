@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ro">
+<head><meta charset="utf-8">
+
+<title>404 • Pagina nu a fost găsită | Inter Broker De Asigurare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+<style>
+  :root{--bg:#ffffff;--ink:#0b1020;--muted:#667085;--brand:#1d4ed8;--accent:#22c55e;--line:#e5e7eb}
+  *{box-sizing:border-box}html,body{height:100%}
+  body{margin:0;background:radial-gradient(1200px 600px at 80% -200px,#dbeafe 0%,transparent 60%) , #f6f8ff;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink)}
+  .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
+  .container{width:100%;max-width:1200px;background:#fff;border-radius:28px;box-shadow:0 16px 40px rgba(2,6,23,.08);overflow:hidden}
+  header{display:flex;justify-content:center;padding:28px;border-bottom:1px solid var(--line)}
+  .logo{width:164px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:60px}
+  @media (max-width:900px){.hero{grid-template-columns:1fr;padding:28px}}
+  h1{margin:0 0 12px 0;font-size:120px;line-height:.85;letter-spacing:1px;
+     background:linear-gradient(180deg,#0f172a,#1d4ed8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{margin:0 0 18px 0;color:var(--muted);font-size:20px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+  .btn{display:inline-block;padding:14px 20px;border-radius:14px;color:#fff;text-decoration:none;font-weight:700}
+  .btn.primary{background:var(--brand)} .btn.dark{background:#2b3444} .btn.whats{background:var(--accent)}
+  .shapes{position:relative;min-height:380px}
+  .shape{position:absolute;border-radius:22px;box-shadow:0 12px 26px rgba(2,6,23,.12)}
+  .a{width:260px;height:260px;right:10%;top:6%;background:#22c55e;transform:rotate(12deg)}
+  .b{width:200px;height:200px;right:36%;top:38%;background:#1d4ed8;transform:rotate(-10deg)}
+  .c{width:150px;height:150px;right:64%;top:12%;background:#93c5fd;transform:rotate(8deg)}
+  .foot{background:#f8fafc;border-top:1px solid var(--line);padding:16px 28px;color:#475569;font-size:13px}
+  .search{margin-top:18px}
+  input[type="text"]{width:100%;max-width:420px;padding:12px 14px;border:1px solid #d1d5db;border-radius:12px;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="container" role="main">
+    <header><img class="logo" src="https://i.imgur.com/Scoof7s.png" alt="Inter Broker De Asigurare"></header>
+    <section class="hero">
+      <div>
+        <h1>404</h1>
+        <p class="lead">Pagina căutată nu există. Caută altceva sau întoarce-te pe prima pagină.</p>
+        <div class="cta">
+          <a class="btn primary" href="/">Înapoi acasă</a>
+          <a class="btn dark" href="/contact">Contactează-ne</a>
+          <a class="btn whats" href="https://wa.me/40750410860?text=Buna%20ziua.%20Va%20contactez%20de%20pe%20website.">WhatsApp</a>
+        </div>
+      </div>
+      <div class="shapes" aria-hidden="true">
+        <div class="shape a"></div><div class="shape b"></div><div class="shape c"></div>
+      </div>
+    </section>
+    <footer class="foot">Telefon: 0750 410 860 • Email: office@euteasigur.ro</footer>
+  </main>
+</div>
+</body>
+</html>

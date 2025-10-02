@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>403 • Acces interzis | Inter Broker De Asigurare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+<style>
+  :root{--bg:#f3f6fb;--card:#fff;--ink:#0f172a;--muted:#64748b;--brand:#1d4ed8;--accent:#22c55e;--line:#e5e7eb;--shadow:0 12px 30px rgba(2,6,23,.08)}
+  *{box-sizing:border-box}html,body{height:100%}
+  body{margin:0;background:linear-gradient(180deg,#f3f6fb 0%,#eef2ff 100%);font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink)}
+  .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
+  .card{width:100%;max-width:1100px;background:var(--card);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+  .header{padding:28px;border-bottom:1px solid var(--line);display:flex;justify-content:center}
+  .logo{width:164px}
+  .body{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:48px}
+  @media (max-width:900px){.body{grid-template-columns:1fr;padding:28px}}
+  h1{margin:0;font-size:96px;line-height:.9;background:linear-gradient(180deg,#111,#1d4ed8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:8px 0 18px 0;color:var(--muted);font-size:18px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;text-decoration:none;font-weight:600}
+  .btn.primary{background:var(--brand)} .btn.dark{background:#334155} .btn.whats{background:var(--accent)}
+  .art{position:relative;min-height:320px}
+  .tile{position:absolute;border-radius:18px;box-shadow:0 10px 24px rgba(2,6,23,.12)}
+  .t1{width:210px;height:210px;left:12%;top:6%;background:#93c5fd;transform:rotate(6deg)}
+  .t2{width:170px;height:170px;left:40%;top:36%;background:#1d4ed8;transform:rotate(-8deg)}
+  .t3{width:140px;height:140px;left:66%;top:8%;background:#22c55e;transform:rotate(12deg)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <article class="card" role="main">
+    <div class="header"><img class="logo" src="https://i.imgur.com/Scoof7s.png" alt=""></div>
+    <section class="body">
+      <div>
+        <h1>403</h1>
+        <p class="sub">Acces interzis. Resursa este restricționată.</p>
+        <p>Nu ai permisiunile necesare pentru a vizualiza această pagină.</p>
+        <div class="cta">
+          <a class="btn primary" href="/">Înapoi acasă</a>
+          <a class="btn dark" href="mailto:office@euteasigur.ro?subject=Eroare%20403">Raportează</a>
+          <a class="btn whats" href="https://wa.me/40750410860?text=Salut%2C%20am%20403%20pe%20site.">WhatsApp</a>
+        </div>
+      </div>
+      <div class="art" aria-hidden="true">
+        <div class="tile t1"></div><div class="tile t2"></div><div class="tile t3"></div>
+      </div>
+    </section>
+    <footer class="foot" style="background:#f8fafc;border-top:1px solid var(--line);padding:16px 28px;color:#475569;font-size:13px">
+      Telefon: 0750 410 860 • Email: office@euteasigur.ro
+    </footer>
+  </article>
+</div>
+</body>
+</html>

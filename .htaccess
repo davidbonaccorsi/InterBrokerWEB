@@ -1,0 +1,22 @@
+Options -Indexes
+RewriteEngine On
+
+# Nu atinge fișierele statice
+RewriteRule \.(css|js|mjs|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|eot)$ - [L]
+
+# Servește intern products.html pentru /products
+RewriteRule ^products/?$ products.html [L]
+
+# Pretty URLs pentru restul .html-urilor
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# Lasa fișierele și directoarele reale in pace (inclusiv /assets/*.css, *.js, imagini)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Scoate slashul final de pe rutele "virtuale" (alege varianta fara slash)
+RewriteCond %{REQUEST_URI} .+/$
+RewriteRule ^(.+?)\/$ /$1 [R=301,L]

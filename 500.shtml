@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>500 • Eroare internă | Inter Broker De Asigurare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+  <!-- Favicon -->
+  <link rel="icon" href="../assets/logo.png" type="image/png">
+<style>
+  :root{--bg:#f3f6fb;--card:#fff;--ink:#0f172a;--muted:#64748b;--brand:#1d4ed8;--accent:#22c55e;--line:#e5e7eb;--shadow:0 12px 30px rgba(2,6,23,.08)}
+  *{box-sizing:border-box}html,body{height:100%}
+  body{margin:0;background:linear-gradient(180deg,#f3f6fb 0%,#eef2ff 100%);font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink)}
+  .wrap{min-height:100%;display:grid;place-items:center;padding:24px}
+  .card{width:100%;max-width:1100px;background:var(--card);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+  .header{padding:28px;border-bottom:1px solid var(--line);display:flex;justify-content:center}
+  .logo{width:164px}
+  .main{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:48px}
+  @media (max-width:900px){.main{grid-template-columns:1fr;padding:28px}}
+  h1{margin:0;font-size:96px;line-height:.9;background:linear-gradient(180deg,#111,#1d4ed8);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:8px 0 18px 0;color:#0f172a;font-size:22px;font-weight:700}
+  .muted{color:var(--muted)}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+  .btn{display:inline-block;padding:12px 18px;border-radius:12px;color:#fff;text-decoration:none;font-weight:700}
+  .btn.primary{background:var(--brand)} .btn.dark{background:#334155} .btn.whats{background:var(--accent)}
+  .foot{background:#f8fafc;border-top:1px solid var(--line);padding:16px 28px;color:#475569;font-size:13px}
+  .art{position:relative;min-height:340px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <article class="card" role="main">
+    <div class="header"><img class="logo" src="https://i.imgur.com/Scoof7s.png" alt=""></div>
+    <section class="main">
+      <div>
+        <h1>500</h1>
+        <p class="sub">A apărut o problemă temporară.</p>
+        <p class="muted">Nu este vina ta. Se repară rapid. Între timp ne poți contacta și intervenim imediat.</p>
+        <div class="cta">
+          <a class="btn primary" href="/">Înapoi acasă</a>
+          <a class="btn dark" href="mailto:office@euteasigur.ro?subject=Eroare%20500">Trimite email</a>
+          <a class="btn whats" href="https://wa.me/40750410860?text=Salut%2C%20v%C4%83d%20eroarea%20500.">WhatsApp</a>
+        </div>
+      </div>
+      <div class="art" aria-hidden="true">
+        <svg viewBox="0 0 600 600">
+          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient></defs>
+          <path fill="url(#g2)">
+            <animate attributeName="d" dur="9s" repeatCount="indefinite"
+              values="M430,308Q410,366,360,419Q310,472,243,472Q176,472,135,418Q94,364,95,286Q96,208,145,156Q194,104,262,96Q330,88,382,130Q434,172,445,236Q456,300,430,308Z;
+                      M447,311Q417,372,367,427Q317,482,243,482Q169,482,128,417Q87,352,89,274Q91,196,143,145Q195,94,266,90Q337,86,389,132Q441,178,461,239Q481,300,447,311Z;
+                      M430,308Q410,366,360,419Q310,472,243,472Q176,472,135,418Q94,364,95,286Q96,208,145,156Q194,104,262,96Q330,88,382,130Q434,172,445,236Q456,300,430,308Z"/>
+          </path>
+        </svg>
+      </div>
+    </section>
+    <footer class="foot">Telefon: 0750 410 860 • Email: office@euteasigur.ro</footer>
+  </article>
+</div>
+</body>
+</html>
