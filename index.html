@@ -16,6 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/logo.png">
+  <script src="/js/protect.js"></script>
 </head>
 <body>
   <header>
@@ -277,7 +278,7 @@
     <div class="adv-grid">
       <div class="adv-card">
         <div class="emoji">💰</div>
-        <h4>Reduceri exclusive</h4>
+        <h4>Preturi exclusive</h4>
         <p>Beneficiezi de tarife speciale negociate cu partenerii noștri.</p>
       </div>
       <div class="adv-card">
@@ -303,20 +304,20 @@
   <section class="stats reveal">
     <h2>Cifre care inspiră încredere</h2>
     <div class="stat-item">
-      <div class="stat-number" data-target="20">0</div>
-      <div class="stat-label">colaboratori</div>
+      <div class="stat-number" data-target="30">0</div>
+      <div class="stat-label">ani de activitate</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" data-target="500">0</div>
-      <div class="stat-label">solicitari rezolvate lunar</div>
+      <div class="stat-number" data-target="1700">0</div>
+      <div class="stat-label">asistenti in brokeraj</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number" data-target="20000">0</div>
+      <div class="stat-number" data-target="1500000">0</div>
+      <div class="stat-label">polițe emise anual</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number" data-target="2000000">0</div>
       <div class="stat-label">clienți fericiți</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number" data-target="500000">0</div>
-      <div class="stat-label">polițe emise</div>
     </div>
   </section>
 
@@ -346,7 +347,7 @@
   <section class="testimonials reveal">
     <h2>
       Ce spun clienții noștri 
-      <a class="google-link" href="https://www.google.com/search?client=opera-gx&hs=3lW&sa=X&sca_esv=1efb9e05a65efdd6&biw=1876&bih=971&tbm=lcl&q=Asigurari+Ca+La+Carte+Reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxI2tzAxszA3MDOwNDE0NbOwNDUw38DI-IpR1rE4M720KLEoU8E5UcEnEUgWlaQqBKWWZaaWFy9ixS8PAD08VBJaAAAA&rldimm=7846870609415689507&hl=en-RO&ved=2ahUKEwjAq73LlKOPAxUwVfEDHUAAI30Q9fQKegQIShAF&cshid=1756028679359258#lkt=LocalPoiReviews" target="_blank">
+      <a class="google-link" href="https://www.google.com/search?sca_esv=2e0bf73006d1ba9f&rlz=1C1CHBD_enRO1125RO1125&tbm=lcl&sxsrf=AE3TifOUQ3YII5wF_u_k-wGseyqBjKsebw:1760003709132&q=Inter+Broker+de+Asigurare+Sibiu+Reviews&rflfq=1&num=20&stick=H4sIAAAAAAAAAONgkxIxNDe2MDM0NLMwMzYxMrEwMbIwNNvAyPiKUd0zryS1SMGpKD8bSKWkKjgWZ6aXFiUWpSoEZyZllioEpZZlppYXL2IlViUAZEn3Rm8AAAA&rldimm=17386116863424842816&hl=en-RO&sa=X&ved=2ahUKEwiCk4vf7JaQAxX-gf0HHRwPE5UQ9fQKegQISxAF&biw=1536&bih=730&dpr=1.25#lkt=LocalPoiReviews" target="_blank">
         <img src="/assets/google.png" alt="Google" /> pe Google
       </a>
     </h2>
@@ -356,7 +357,7 @@
         <p class="author">– Cristina P.</p>
       </div>
       <div class="testimonial">
-        <p class="quote">„Consiliere si asistenta " Ca La Carte".Exact asa cum trebuie sa fie. Multumesc!.”</p>
+        <p class="quote">„Consiliere si asistenta " in #INTEResul clientului".Exact asa cum trebuie sa fie. Multumesc!.”</p>
         <p class="author">– Paul R.</p>
       </div>
       <div class="testimonial">
@@ -419,11 +420,11 @@
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><strong>Telefon:</strong> <a href="tel:+40750410860">0750 410 860</a></li>
+          <li><strong>Telefon:</strong> <a href="tel:+40755344589">0755 344 589</a></li>
           <li><strong>Email:</strong> <a href="mailto:office@euteasigur.ro">office@euteasigur.ro</a></li>
-          <li><strong>Adresă:</strong> Baba Novac nr.19, Sector 3,  București</li>
+          <li><strong>Adresă:</strong> Str. Nojoridului 270, Oradea, Bihor</li>
           <li><strong>Program:</strong> Luni – Duminica, 8:00 – 22:00 </li>
-          <li><a href="https://www.facebook.com/people/Asigurari-Ca-La-Carte/61567871543157" target="_blank" rel="noopener"><img src="/assets/facebook.png" alt="Facebook" class="footer-icon"> Facebook</a></li>
+          <li><a href="https://www.facebook.com/InterBrokerOficial/?locale=ro_RO" target="_blank" rel="noopener"><img src="/assets/facebook.png" alt="Facebook" class="footer-icon"> Facebook</a></li>
         </ul>
       </div>
     </div>
@@ -431,31 +432,43 @@
   </footer>
 
   <script src="/js/script.js"></script>
-  <script>
-    // update current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-  <script>
+  <!-- Modul de server vechi, utilizam protect.js  -->
+  <!-- <script>
   const isLocal = /^http:\/\/127\.0\.0\.1:\d+$/.test(location.origin);
 
+  // Modifică toate linkurile <a>
   document.querySelectorAll("a").forEach(link => {
     if (isLocal) {
       const originalHref = link.getAttribute("href");
 
-      // Dacă e linkul exact către homepage, redirecționează către index.html
       if (originalHref === "https://euteasigur.ro") {
         link.setAttribute("href", "../index.html");
         return;
       }
 
-      // Pentru celelalte linkuri, elimină domeniul și adaugă .html
       const stripped = originalHref.replace(/^https:\/\/euteasigur\.ro/, "");
       link.setAttribute("href", `..${stripped}.html`);
     }
   });
-</script>
+
+  // Modifică toate elementele cu onclick care conțin location.href
+  document.querySelectorAll("[onclick]").forEach(el => {
+    if (isLocal) {
+      const onclickValue = el.getAttribute("onclick");
+
+      const match = onclickValue.match(/location\.href='(https:\/\/euteasigur\.ro[^']*)'/);
+      if (match && match[1]) {
+        let newHref = match[1].replace(/^https:\/\/euteasigur\.ro/, "");
+        if (newHref === "") {
+          newHref = "/index";
+        }
+        el.setAttribute("onclick", `location.href='..${newHref}.html'`);
+      }
+    }
+  });
+  </script> -->
   <!-- Floating WhatsApp button -->
-  <a href="https://wa.me/40750410860?text=Bună%20ziua!%20As%20dorii%20o%20ofertă." class="wa-float" aria-label="Contact pe WhatsApp">
+  <a href="https://wa.me/40755344589?text=Bună%20ziua!%20As%20dorii%20o%20ofertă." class="wa-float" aria-label="Contact pe WhatsApp">
     <img src="/assets/whatsapp.svg" alt="WhatsApp" style="height:24px; width:24px; display:block;" />
   </a>
 </body>

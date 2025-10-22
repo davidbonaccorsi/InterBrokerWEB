@@ -284,11 +284,11 @@
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><strong>Telefon:</strong> <a href="tel:+40750410860">0750 410 860</a></li>
+          <li><strong>Telefon:</strong> <a href="tel:+40755344589">0755 344 589</a></li>
           <li><strong>Email:</strong> <a href="mailto:office@euteasigur.ro">office@euteasigur.ro</a></li>
-          <li><strong>Adresă:</strong> Baba Novac nr.19, Sector 3,  București</li>
+          <li><strong>Adresă:</strong> Str. Nojoridului 270, Oradea, Bihor</li>
           <li><strong>Program:</strong> Luni – Duminica, 8:00 – 22:00 </li>
-          <li><a href="https://www.facebook.com/people/Asigurari-Ca-La-Carte/61567871543157" target="_blank" rel="noopener"><img src="/assets/facebook.png" alt="Facebook" class="footer-icon"> Facebook</a></li>
+          <li><a href="https://www.facebook.com/InterBrokerOficial/?locale=ro_RO" target="_blank" rel="noopener"><img src="/assets/facebook.png" alt="Facebook" class="footer-icon"> Facebook</a></li>
         </ul>
       </div>
     </div>
@@ -313,24 +313,39 @@
   <script>
   const isLocal = /^http:\/\/127\.0\.0\.1:\d+$/.test(location.origin);
 
+  // Modifică toate linkurile <a>
   document.querySelectorAll("a").forEach(link => {
     if (isLocal) {
       const originalHref = link.getAttribute("href");
 
-      // Dacă e linkul exact către homepage, redirecționează către index.html
       if (originalHref === "https://euteasigur.ro") {
         link.setAttribute("href", "../index.html");
         return;
       }
 
-      // Pentru celelalte linkuri, elimină domeniul și adaugă .html
       const stripped = originalHref.replace(/^https:\/\/euteasigur\.ro/, "");
       link.setAttribute("href", `..${stripped}.html`);
     }
   });
-</script>
+
+  // Modifică toate elementele cu onclick care conțin location.href
+  document.querySelectorAll("[onclick]").forEach(el => {
+    if (isLocal) {
+      const onclickValue = el.getAttribute("onclick");
+
+      const match = onclickValue.match(/location\.href='(https:\/\/euteasigur\.ro[^']*)'/);
+      if (match && match[1]) {
+        let newHref = match[1].replace(/^https:\/\/euteasigur\.ro/, "");
+        if (newHref === "") {
+          newHref = "/index";
+        }
+        el.setAttribute("onclick", `location.href='..${newHref}.html'`);
+      }
+    }
+  });
+  </script>
   <!-- Floating WhatsApp button -->
-  <a href="https://wa.me/40750410860?text=Bună%20ziua!%20As%20dorii%20o%20ofertă." class="wa-float" aria-label="Contact pe WhatsApp">
+  <a href="https://wa.me/40755344589?text=Bună%20ziua!%20As%20dorii%20o%20ofertă." class="wa-float" aria-label="Contact pe WhatsApp">
     <img src="/assets/whatsapp.svg" alt="WhatsApp" style="height:24px; width:24px; display:block;" />
   </a>
 </body>
